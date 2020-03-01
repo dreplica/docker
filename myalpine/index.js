@@ -1,5 +1,5 @@
 const hapi = require("@hapi/hapi");
-
+ 
 async function start() {
   const server = hapi.server({
     host: "0.0.0.0",
