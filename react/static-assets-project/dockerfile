@@ -1,0 +1,10 @@
+#build container
+FROM node:12-stretch as build
+WORKDIR /build
+COPY  .  .
+RUN npm ci && npm run build
+
+#should be the nginx container
+FROM nginx:1.17
+WORKDIR /usr/share/nginx/html
+COPY --from=build /build/build .

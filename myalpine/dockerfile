@@ -3,12 +3,15 @@ FROM node:12-stretch AS build
 WORKDIR /build
 COPY package-lock.json package.json ./
 RUN npm ci
+#ci runs npm and forgets unwanted dependeciesdocker 
 COPY . .
 
-#main stage
-FROM alpine:3.10
+#main stage // remember this line
+FROM alpine:3.10 
+#alpine specifically the 3.10
 RUN apk add --update nodejs
 RUN addgroup -S node && adduser -S node -G node
+#am creating a node group with a user group here
 USER node
 RUN mkdir /home/node/code
 WORKDIR /home/node/code
